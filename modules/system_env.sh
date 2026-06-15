@@ -102,9 +102,9 @@ show_env_menu() {
         echo " 3) Enable ZRAM Dynamic Memory Compression (Crash Prevention)"
         echo " 4) Inject Advanced Shell Maintenance Shortcuts (Aliases)"
         echo " 5) Run All Environment Adjustments Sequentially (Recommended)"
-        echo " 6) Back to Main Menu"
+        echo " 0) Back to Main Menu"
         echo -e "${CYAN}======================================================================${NC}"
-        read -p "Select an environmental routine [1-6]: " ENV_CHOICE
+        read -p "Select an environmental routine [0-5]: " ENV_CHOICE
 
         case $ENV_CHOICE in
             1) configure_timezone ;;
@@ -117,7 +117,7 @@ show_env_menu() {
                 enable_zram_optimization
                 apply_shell_tweaks
                 ;;
-            6) log_info "Returning to main menu suite."; break ;;
+            0) log_info "Returning to main menu suite."; break ;;
             *) log_error "Invalid selection item." ;;
         esac
     done
