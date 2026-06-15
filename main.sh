@@ -54,7 +54,15 @@ case $MAIN_CHOICE in
             exit 1
         fi
         ;;
-    2|3|4)
+    2)
+        if [ -f "$MODULES_DIR/optimization.sh" ]; then
+            source "$MODULES_DIR/optimization.sh"
+        else
+            log_error "Optimization module not found at: $MODULES_DIR/optimization.sh"
+            exit 1
+        fi
+        ;;
+    3|4)
         log_warn "This architecture module is slated for the next development sprint."
         exit 0
         ;;
