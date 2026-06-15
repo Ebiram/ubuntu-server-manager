@@ -191,9 +191,9 @@ show_provision_menu() {
         echo " 7) Install PostgreSQL Database Server"
         echo " 8) Install Redis Cache Server (Memory Optimized)"
         echo " 9) Install Postfix Outbound Mail Server"
-        echo " 10) Back to Main Menu"
+        echo " 0) Back to Main Menu"
         echo -e "${CYAN}======================================================================${NC}"
-        read -p "Select a software package to provision [1-10]: " SUB_CHOICE
+        read -p "Select a software package to provision [0-9]: " SUB_CHOICE
 
         case $SUB_CHOICE in
             1) install_nginx ;;
@@ -205,7 +205,7 @@ show_provision_menu() {
             7) install_postgresql ;;
             8) install_redis ;;
             9) install_mail_server ;;
-            10) log_info "Returning to main menu suite."; break ;;
+            0) log_info "Returning to main menu suite."; break ;;
             *) log_error "Invalid item selection." ;;
         esac
     done
