@@ -207,7 +207,6 @@ show_provision_menu() {
             9) install_mail_server ;;
             10) log_info "Returning to main menu suite."; break ;;
             *) log_error "Invalid item selection." ;;
-         photocopy
         esac
     done
 }
