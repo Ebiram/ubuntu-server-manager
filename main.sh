@@ -79,9 +79,9 @@ while true; do
     echo " 5) Multi-Server Tunneling & Reverse Proxy Suite (Gost, Xray Reverse)"
     echo " 6) System Environment Localization & Tuning (DNS, Timezone, ZRAM)"
     echo " 7) Install this Suite Permanently to Server Local Hardware"
-    echo " 8) Exit Manager"
+    echo " 0) Exit Manager"
     echo -e "${CYAN}======================================================================${NC}"
-    read -p "Select an architecture module [1-8]: " MAIN_CHOICE
+    read -p "Select an architecture module [0-7]: " MAIN_CHOICE
 
     case $MAIN_CHOICE in
         1) run_module "security.sh" ;;
@@ -91,7 +91,7 @@ while true; do
         5) run_module "tunnel.sh" ;;
         6) run_module "system_env.sh" ;;
         7) trigger_self_installation ;;
-        8) log_info "Exiting Server Manager. Goodbye!"; exit 0 ;;
+        0) log_info "Exiting Server Manager. Goodbye!"; exit 0 ;;
         *) log_error "Invalid selection. Please try again." ; sleep 2 ;;
     esac
     
