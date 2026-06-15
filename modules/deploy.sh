@@ -64,14 +64,14 @@ show_deploy_menu() {
         echo -e "${CYAN}======================================================================${NC}"
         echo " 1) Install 3x-ui Panel (Xray Management Platform)"
         echo " 2) Install OpenVPN Server (Angristan Secured Script)"
-        echo " 3) Back to Main Menu"
+        echo " 0) Back to Main Menu"
         echo -e "${CYAN}======================================================================${NC}"
         read -p "Select an application deployment routine [1-3]: " APP_CHOICE
 
         case $APP_CHOICE in
             1) install_3x_ui ;;
             2) install_openvpn ;;
-            3) log_info "Returning to main menu suite."; break ;;
+            0) log_info "Returning to main menu suite."; break ;;
             *) log_error "Invalid item selection." ;;
         esac
     done
