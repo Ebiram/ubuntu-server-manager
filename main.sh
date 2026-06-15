@@ -71,8 +71,12 @@ case $MAIN_CHOICE in
         fi
         ;;
     4)
-        log_warn "This architecture module is slated for the next development sprint."
-        exit 0
+        if [ -f "$MODULES_DIR/deploy.sh" ]; then
+            source "$MODULES_DIR/deploy.sh"
+        else
+            log_error "Deploy module not found at: $MODULES_DIR/deploy.sh"
+            exit 1
+        fi
         ;;
     *)
         log_error "Invalid selection. Terminating process."
