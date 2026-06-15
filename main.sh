@@ -39,8 +39,9 @@ echo " 2) Performance Optimization & Kernel Tuning"
 echo " 3) Specific Service Provisioning (PHP, Nginx, MariaDB, Node.js)"
 echo " 4) Custom Application Script Deployment (3x-ui, OpenVPN)"
 echo " 5) Multi-Server Tunneling & Reverse Proxy Suite (Gost, Xray Reverse)"
+echo " 6) System Environment Localization & Tuning (DNS, Timezone, ZRAM)"
 echo -e "${CYAN}======================================================================${NC}"
-read -p "Select an architecture module [1-5]: " MAIN_CHOICE
+read -p "Select an architecture module [1-6]: " MAIN_CHOICE
 
 case $MAIN_CHOICE in
     1) source "$MODULES_DIR/security.sh" ;;
@@ -48,5 +49,6 @@ case $MAIN_CHOICE in
     3) source "$MODULES_DIR/provision.sh" ;;
     4) source "$MODULES_DIR/deploy.sh" ;;
     5) source "$MODULES_DIR/tunnel.sh" ;;
+    6) source "$MODULES_DIR/system_env.sh" ;;
     *) log_error "Invalid selection. Terminating process."; exit 1 ;;
 esac
