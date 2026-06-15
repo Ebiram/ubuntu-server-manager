@@ -27,30 +27,30 @@ log_error() { echo -e "${RED}[ERROR] $1${NC}"; }
 
 export -f log_info log_success log_warn log_error
 
+# Resolve the absolute path where THIS script is actually located
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MODULES_DIR="$SCRIPT_DIR/modules"
 
-# Function to self-install the suite into the local system binary pathway
 trigger_self_installation() {
     log_info "Initiating Global System Installation Pipeline..."
     
     TARGET_SYSTEM_DIR="/srv/ubuntu-aio-server-manager"
     
-    # 1. Create the persistent application directory if it doesn't match
+    # 1. Clone to persistent state directory if run from temp folder
     if [ "$SCRIPT_DIR" != "$TARGET_SYSTEM_DIR" ]; then
         mkdir -p "$TARGET_SYSTEM_DIR"
         cp -r "$SCRIPT_DIR/"* "$TARGET_SYSTEM_DIR/"
-        log_info "Project assets cloned to a persistent state directory: $TARGET_SYSTEM_DIR"
+        log_info "Project assets cloned to a persistent directory: $TARGET_SYSTEM_DIR"
     fi
 
-    # 2. Grant structural execution permissions
+    # 2. Grant structural execution permissions recursively
     chmod +x "$TARGET_SYSTEM_DIR/main.sh"
     chmod +x "$TARGET_SYSTEM_DIR/modules/"*.sh 2>/dev/null
     
     # 3. Create a Symlink inside /usr/local/bin to enable direct execution
     ln -sf "$TARGET_SYSTEM_DIR/main.sh" /usr/local/bin/server-manager
     
-    log_success "Installation Complete! You can now execute this suite from any directory by typing: server-manager"
+    log_success "Installation Complete! You can now type: server-manager"
 }
 
 clear
@@ -67,13 +67,26 @@ echo " 7) Install this Suite Permanently to Server Local Hardware"
 echo -e "${CYAN}======================================================================${NC}"
 read -p "Select an architecture module [1-7]: " MAIN_CHOICE
 
+# Helper function to source modules safely
+run_module() {
+    local module_path="$MODULES_DIR/$1"
+    if [ -f "$module_path" ]; then
+        # Ensure it has execution rights dynamically
+        chmod +x "$module_path"
+        source "$module_path"
+    else
+        log_error "Module not found at: $module_path"
+        exit 1
+    fi
+}
+
 case $MAIN_CHOICE in
-    1) source "$MODULES_DIR/security.sh" ;;
-    2) source "$MODULES_DIR/optimization.sh" ;;
-    3) source "$MODULES_DIR/provision.sh" ;;
-    4) source "$MODULES_DIR/deploy.sh" ;;
-    5) source "$MODULES_DIR/tunnel.sh" ;;
-    6) source "$MODULES_DIR/system_env.sh" ;;
+    1) run_module "security.sh" ;;
+    2) run_module "optimization.sh" ;;
+    3) run_module "provision.sh" ;;
+    4) run_module "deploy.sh" ;;
+    5) run_module "tunnel.sh" ;;
+    6) run_module "system_env.sh" ;;
     7) trigger_self_installation ;;
     *) log_error "Invalid selection. Terminating process."; exit 1 ;;
 esac
