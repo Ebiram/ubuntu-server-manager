@@ -206,15 +206,15 @@ show_tunnel_menu() {
         echo " 1) Deploy High-Performance GOST Tunnel (gRPC Multiplexing)"
         echo " 2) Deploy Xray Core Native Reverse Proxy (Zero-Trust Model)"
         echo " 3) Execute Tunnel Link Diagnostics (Latency & iperf3 Benchmark)"
-        echo " 4) Back to Main Menu"
+        echo " 0) Back to Main Menu"
         echo -e "${CYAN}======================================================================${NC}"
-        read -p "Select a tunneling topology [1-4]: " TUNNEL_CHOICE
+        read -p "Select a tunneling topology [0-3]: " TUNNEL_CHOICE
 
         case $TUNNEL_CHOICE in
             1) setup_gost_tunnel ;;
             2) setup_xray_reverse ;;
             3) test_tunnel_diagnostics ;;
-            4) log_info "Returning to main menu suite."; break ;;
+            0) log_info "Returning to main menu suite."; break ;;
             *) log_error "Invalid selection item." ;;
         esac
     done
