@@ -7,7 +7,7 @@ A modular, highly secure, and production-ready Bash automation suite tailored fo
 Execute this unified block on any fresh Ubuntu terminal to fetch the suite and launch the manager dynamically:
 
 ```bash
-rm -rf /tmp/server-tools && git clone https://github.com/Ebiram/ubuntu-aio-server-manager.git /tmp/server-tools && cd /tmp/server-tools && chmod +x main.sh && ./main.sh
+rm -rf /tmp/server-tools && git clone https://github.com/Ebiram/ubuntu-server-manager.git /tmp/server-tools && cd /tmp/server-tools && chmod +x main.sh && ./main.sh
 ```
 
 ## 🚀 Key Features & Architecture
