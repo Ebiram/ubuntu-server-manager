@@ -8,7 +8,7 @@ Run the following command on your fresh Ubuntu server to download, extract, and 
 
 ```bash
 mkdir -p /tmp/server-tools && \
-curl -sL [https://github.com/Ebiram/ubuntu-aio-server-manager/archive/refs/heads/main.tar.gz](https://github.com/Ebiram/ubuntu-aio-server-manager/archive/refs/heads/main.tar.gz) | \
+curl -sL https://github.com/Ebiram/ubuntu-aio-server-manager/archive/refs/heads/main.tar.gz | \
 tar -xz -C /tmp/server-tools --strip-components=1 && \
 cd /tmp/server-tools && \
 chmod +x main.sh && \
