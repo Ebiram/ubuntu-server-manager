@@ -2,7 +2,7 @@
 
 # ==============================================================================
 #  PROJECT: AUTOMATED SERVER MANAGEMENT SUITE
-#  FILE: main.sh (Core Orchestrator with Persistent Menu Loop)
+#  FILE: main.sh (Core Orchestrator with Symlink Resolution)
 #  Target OS: Ubuntu 24.04 LTS and higher
 # ==============================================================================
 
@@ -27,7 +27,14 @@ log_error() { echo -e "${RED}[ERROR] $1${NC}"; }
 
 export -f log_info log_success log_warn log_error
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# --- RESOLVE REAL PATH EVEN IF RUN VIA SYMLINK ---
+TARGET_FILE="${BASH_SOURCE[0]}"
+while [ -h "$TARGET_FILE" ]; do
+    SCRIPT_DIR="$(cd -P "$(dirname "$TARGET_FILE")" && pwd)"
+    TARGET_FILE="$(readlink "$TARGET_FILE")"
+    [[ $TARGET_FILE != /* ]] && TARGET_FILE="$SCRIPT_DIR/$TARGET_FILE"
+done
+SCRIPT_DIR="$(cd -P "$(dirname "$TARGET_FILE")" && pwd)"
 MODULES_DIR="$SCRIPT_DIR/modules"
 
 trigger_self_installation() {
