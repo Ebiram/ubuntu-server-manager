@@ -95,7 +95,6 @@ while true; do
         *) log_error "Invalid selection. Please try again." ; sleep 2 ;;
     esac
     
-    # منوی اصلی پس از اتمام کار هر ماژول، ۲ ثانیه مکث می‌کند و دوباره لود می‌شود
     echo -e "\n${YELLOW}Press Enter to return to Main Menu...${NC}"
     read
 done
