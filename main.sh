@@ -40,7 +40,7 @@ MODULES_DIR="$SCRIPT_DIR/modules"
 trigger_self_installation() {
     log_info "Initiating Global System Installation Pipeline..."
     
-    TARGET_SYSTEM_DIR="/srv/ubuntu-aio-server-manager"
+    TARGET_SYSTEM_DIR="/srv/ubuntu-server-manager"
     
     if [ "$SCRIPT_DIR" != "$TARGET_SYSTEM_DIR" ]; then
         mkdir -p "$TARGET_SYSTEM_DIR"
